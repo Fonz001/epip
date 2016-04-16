@@ -1,13 +1,13 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+var user = "bits-leonardo";
 
-/**
- * Get the current URL.
- *
- * @param {function(string)} callback - called when the URL of the current tab
- *   is found.
- */
+
+
+
+
+
+
+
+
 function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
@@ -69,28 +69,44 @@ function loadDoc(url,callback)
   x.send();
 }
 
+
 function send_tap(e)
 {
   command = document.getElementById('command').value;
-  user='user';
+  //user='user';
 
-  e = e || window.event;
-  var target = e.target || e.srcElement,
-  slack = target.textContent || text.innerText;
+  //if(!user) document.getElementById("user").className = '';
+
+
+
+  //e = e || window.event;
+  //var target = e.target || e.srcElement,
+  //slack = target.textContent || text.innerText;
+
+  var list = document.getElementById("list");
+  var slack = list.options[list.selectedIndex].text;
 
   document.getElementById('command').value = '';
   getCurrentTabUrl(function(tab) {
     loadDoc('http://epip.nl/test.php?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
+  
+    document.getElementById("done").className = 'show';
   });
 }
-
+//http://local.funcolors.nl/share
 
 
 document.addEventListener('DOMContentLoaded', function() {
   loadDoc('http://epip.nl/slack_list.php',create_list);
 });
 
+function set_user()
+{
+  var list = document.getElementById("user");
+  user = list.options[list.selectedIndex].text;
 
+  document.getElementById("user").className = 'hidden';
+}
   
 function create_list(data)
 {
@@ -105,14 +121,19 @@ function save_tab(data)
 }
 
 function add_to_list(item){
-  var entry = document.createElement('li');
+  var entry = document.createElement('option');
   entry.appendChild(document.createTextNode(item));
   document.getElementById("list").appendChild(entry);
-  entry.addEventListener("click", send_tap);
+
+
+  //var entry2 = document.createElement('option');
+ // entry2.appendChild(document.createTextNode(item));
+  //if(!item.match(/\#/))  document.getElementById("user").appendChild(entry2);
+
 }
 
-
-//document.getElementById("share").addEventListener("click", send_tap);
+//document.getElementById("user").addEventListener("change", set_user);
+document.getElementById("share").addEventListener("click", send_tap);
 
 
 
