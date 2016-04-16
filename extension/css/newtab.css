@@ -1,0 +1,47 @@
+body {
+    margin:0 auto;
+    font-family:'Open Sans',Verdana,sans-serif;
+    color:#444;
+    background:#ddd url(../img/body.png) no-repeat 0% 50% fixed;
+}
+
+#logo {
+    display:block;
+    height:195px;
+    width:298px;
+    margin:25px 0 0 25px;
+    background:url(../img/logo.png) no-repeat;
+    background-size:75%;
+    text-indent:-1337em;
+    overflow:hidden;
+}
+
+#author {
+    position:absolute;
+    top:5%;
+    right:5%;
+    width:66%;
+    height:23%;
+}
+
+#author img {
+    float:right;
+    width:80px;
+    height:80px;
+    border-radius: 100%;
+}
+
+#preview {
+    position:absolute;
+    bottom:5%;
+    right:5%;
+    width:66%;
+    height:66%;
+    border:25px solid #fff;
+    background:#fff;
+    overflow:hidden;
+}
+
+#preview img {
+    width:100%;
+}
