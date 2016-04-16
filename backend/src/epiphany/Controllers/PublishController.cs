@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using epiphany.Models;
 using epiphany.Repositories;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,6 +25,8 @@ namespace epiphany.Controllers
         [Route("share")]
         public IActionResult Share(Link link)
         {
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
             if (!string.IsNullOrEmpty(link.Url) && !string.IsNullOrEmpty(link.Slack))
             {
                 link.CreateDateTime = DateTime.Now;
@@ -38,6 +41,8 @@ namespace epiphany.Controllers
         [Route("get")]
         public ActionResult Get(string user)
         {
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
             var allLinks = _linkrepository.All();
 
             user = "@"+user.Trim('@');
