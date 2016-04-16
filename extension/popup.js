@@ -34,7 +34,7 @@ function getCurrentTabUrl(callback) {
     // "url" properties.
     console.assert(typeof url == 'string', 'tab.url should be a string');
 
-    callback(url);
+    callback(tab);
   });
 
   // Most methods of the Chrome extension APIs are asynchronous. This means that
@@ -47,22 +47,50 @@ function getCurrentTabUrl(callback) {
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
-function loadDoc(url,data) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-     document.getElementById("demo").innerHTML = xhttp.responseText;
-    }
-  };
-  xhttp.open("POST", url, true);
-  xhttp.send();
+function renderStatus(statusText) {
+  document.getElementById('status').textContent = statusText;
 }
 
+
+function loadDoc(url,data)
+{
+  var x = new XMLHttpRequest();
+  x.open('GET', url);
+
+  //x.send(JSON.stringify(data));
+
+  x.responseType = 'json';
+  x.onload = function() {
+    var response = x.response;
+    renderStatus(response.url+'\n'+response.title+'\n'+response.comment+'\n'+response.slack+'\n'+response.user);
+  };
+  x.onerror = function() {
+    renderStatus(x.status);
+  };
+  x.send();
+}
+
+function send_tap()
+{
+  getCurrentTabUrl(function(tab) {
+
+    loadDoc('http://epip.nl/test.php?url='+JSON.stringify(tab.url)+'&title='+tab.title+'&comment='+'command'+'&slack='+'slack'+'&user='+'user');
+  });
+}
+
+document.getElementById("share").addEventListener("click", send_tap);
+
 document.addEventListener('DOMContentLoaded', function() {
-  getCurrentTabUrl(function(url) {
-    
-    //loadDoc('epip.nl',{url:url,title:'test_title'});
+ 
+});
+  
     
 
-  });
-});
+//local.funcolors.nl?
+
+//url: "http://example.xxx",
+//title: "Title van de pagina (aanpasbaar?)",
+//comment: "Kijk eens wat een goed pagina!",
+//slack: "#bits-please" || "@bits-leonardo", // general default
+//user: "@bits-donatello"
+
