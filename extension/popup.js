@@ -52,7 +52,7 @@ function renderStatus(statusText) {
 }
 
 
-function loadDoc(url,data)
+function loadDoc(url,callback)
 {
   var x = new XMLHttpRequest();
   x.open('GET', url);
@@ -61,8 +61,7 @@ function loadDoc(url,data)
 
   x.responseType = 'json';
   x.onload = function() {
-    var response = x.response;
-    renderStatus(response.url+'\n'+response.title+'\n'+response.comment+'\n'+response.slack+'\n'+response.user);
+    callback(x.response);
   };
   x.onerror = function() {
     renderStatus(x.status);
@@ -70,21 +69,52 @@ function loadDoc(url,data)
   x.send();
 }
 
-function send_tap()
+function send_tap(e)
 {
-  getCurrentTabUrl(function(tab) {
+  command = document.getElementById('command').value;
+  user='user';
 
-    loadDoc('http://epip.nl/test.php?url='+JSON.stringify(tab.url)+'&title='+tab.title+'&comment='+'command'+'&slack='+'slack'+'&user='+'user');
+  e = e || window.event;
+  var target = e.target || e.srcElement,
+  slack = target.textContent || text.innerText;
+
+  document.getElementById('command').value = '';
+  getCurrentTabUrl(function(tab) {
+    loadDoc('http://epip.nl/test.php?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
   });
 }
 
-document.getElementById("share").addEventListener("click", send_tap);
+
 
 document.addEventListener('DOMContentLoaded', function() {
- 
+  loadDoc('http://epip.nl/slack_list.php',create_list);
 });
+
+
   
-    
+function create_list(data)
+{
+  for (i = 0; i < data.length; ++i) {
+    add_to_list(data[i]);
+  }
+}
+
+function save_tab(data)
+{
+ renderStatus(data.url+'\n'+data.title+'\n'+data.comment+'\n'+data.slack+'\n'+data.user);
+}
+
+function add_to_list(item){
+  var entry = document.createElement('li');
+  entry.appendChild(document.createTextNode(item));
+  document.getElementById("list").appendChild(entry);
+  entry.addEventListener("click", send_tap);
+}
+
+
+//document.getElementById("share").addEventListener("click", send_tap);
+
+
 
 //local.funcolors.nl?
 
