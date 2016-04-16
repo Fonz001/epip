@@ -88,12 +88,12 @@ function send_tap(e)
 
   document.getElementById('command').value = '';
   getCurrentTabUrl(function(tab) {
-    loadDoc('http://epip.nl/test.php?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
+    loadDoc('http://local.funcolors.nl/share?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
   
     document.getElementById("done").className = 'show';
   });
 }
-//http://local.funcolors.nl/share
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
