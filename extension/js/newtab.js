@@ -1,13 +1,14 @@
 $(function(){
 
     // hardcoded user of the extension
-    var slackUser = 'bits-michelangelo'
+    var thisUser = 'bits-michelangelo';
 
-    $.get('http://local.funcolors.nl/get/?User=' + slackUser, function(data){
+    $.get('http://local.funcolors.nl/get/?User=' + thisUser, function(data){
 
         // hardcoded slack user images
         var slackImage = 'https://secure.gravatar.com/avatar/cb0853110a3e6c0f6220465716ff7fed.jpg?s=512';
-        switch(data.User)
+        var slackUser = (data.User[0] != '#' && data.User[0] != '@') ? '@' + data.User : data.User;
+        switch(slackUser)
         {
             case '@bits-donatello':    slackImage = 'https://secure.gravatar.com/avatar/e60cd391672beff50d78f7bb89b53d7c.jpg?s=512'; break;
             case '@bits-michelangelo': slackImage = 'https://secure.gravatar.com/avatar/cb0853110a3e6c0f6220465716ff7fed.jpg?s=512'; break;
@@ -22,7 +23,7 @@ $(function(){
         var img = new Image();
         img.src = src;
         $('#author').append(img);
-        $('#author').append('<p><strong>Shared by</strong></p><p>' + data.User + ' ' + combo + '</p>');
+        $('#author').append('<p><strong>Shared by</strong></p><p>' + slackUser + ' ' + combo + '</p>');
         $('#comment').append('<p><em>"' + data.Comment + '"</em></p>');
 
         // inject website preview image
