@@ -1,4 +1,4 @@
-var user = "bits-michelangelo";
+var user = "bits-donatello";
 
 
 
@@ -88,7 +88,7 @@ function send_tap(e)
 
   document.getElementById('command').value = '';
   getCurrentTabUrl(function(tab) {
-    loadDoc('http://local.funcolors.nl/share?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
+    loadDoc('http://vps1483.directvps.nl/share?url='+encodeURIComponent(tab.url)+'&title='+encodeURIComponent(tab.title)+'&comment='+encodeURIComponent(command)+'&slack='+encodeURIComponent(slack)+'&user='+encodeURIComponent(user),save_tab);
   
     document.getElementById("done").className = 'show';
   });

@@ -1,9 +1,9 @@
 $(function(){
 
     // hardcoded user of the extension
-    var thisUser = 'bits-michelangelo';
+    var thisUser = 'bits-donatello';
 
-    $.get('http://local.funcolors.nl/get/?User=' + thisUser, function(data){
+    $.get('http://vps1483.directvps.nl/get/?User=' + thisUser, function(data){
 
         // hardcoded slack user images
         var slackImage = 'https://secure.gravatar.com/avatar/cb0853110a3e6c0f6220465716ff7fed.jpg?s=512';
