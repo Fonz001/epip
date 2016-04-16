@@ -42,15 +42,15 @@ namespace epiphany.Repositories
                     Title = "A Neural Network Playground",
                     Comment = "Wow, freaking vet!"
                 },
-                new Link
-                {
-                    Url = "http://www.nytimes.com/2016/04/17/magazine/the-minecraft-generation.html?_r=0",
-                    Slack = "@bits-michelangelo",
-                    User = "@bits-donatello",
-                    CreateDateTime = DateTime.Now,
-                    Title = "The Minecraft Generation",
-                    Comment = "Vanavond potje minecraft? :-D"
-                },
+                //new Link
+                //{
+                //    Url = "http://www.nytimes.com/2016/04/17/magazine/the-minecraft-generation.html?_r=0",
+                //    Slack = "@bits-michelangelo",
+                //    User = "@bits-donatello",
+                //    CreateDateTime = DateTime.Now,
+                //    Title = "The Minecraft Generation",
+                //    Comment = "Vanavond potje minecraft? :-D"
+                //},
                 new Link
                 {
                     Url = "http://www.scylladb.com/2016/04/14/io-scheduler-1/",

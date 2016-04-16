@@ -24,7 +24,7 @@ namespace epiphany.Controllers
         [Route("share")]
         public IActionResult Share(Link link)
         {
-            if (!string.IsNullOrEmpty(link.Url))
+            if (!string.IsNullOrEmpty(link.Url) && !string.IsNullOrEmpty(link.Slack))
             {
                 link.CreateDateTime = DateTime.Now;
 
@@ -42,20 +42,44 @@ namespace epiphany.Controllers
 
             user = "@"+user.Trim('@');
 
+            Link responseLink = null;
+
             if (!string.IsNullOrEmpty(user))
             {
-                allLinks = allLinks.Where(l => (l.Slack == user || l.Slack.StartsWith("#") || string.IsNullOrEmpty(l.Slack)) && l.User != user).ToList();
+
+                
+                responseLink = allLinks.Where(l => l.Slack == user && !l.ViewedBy.Contains(user)).OrderByDescending(l => l.CreateDateTime).FirstOrDefault();
+
+                if (responseLink == null)
+                {
+                    responseLink =
+                        allLinks.Where(
+                            l =>
+                                (l.Slack.StartsWith("#") || string.IsNullOrEmpty(l.Slack)) && l.User != user &&
+                                !l.ViewedBy.Contains(user))
+                            .OrderByDescending(l => l.CreateDateTime).FirstOrDefault();
+                }
+
+
+                
             }
 
-            if (allLinks.Any())
+            if (responseLink == null)
             {
-                var item = RandomItem(allLinks);
-
-                return Json(item);
+                responseLink = RandomItem(allLinks.Where(l => l.Slack == user || l.Slack.StartsWith("#")).ToList());
             }
 
-            return Json(new List<Link>());
+            UpdateViewed(responseLink, user);
+            return Json(responseLink);
 
+        }
+
+        private static void UpdateViewed(Link item, string user)
+        {
+            if (!item.ViewedBy.Contains(user))
+            {
+                item.ViewedBy.Add(user);
+            }
         }
 
         private static Link RandomItem(IList<Link> allLinks)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace epiphany.Models
 {
@@ -14,5 +15,12 @@ namespace epiphany.Models
         /// Submitting user
         /// </summary>
         public string User  { get; set; } // "@bits-donatello"
+
+        public List<string> ViewedBy { get; set; }
+
+        public Link()
+        {
+            ViewedBy = new List<string>();
+        }
     }
 }
