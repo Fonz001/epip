@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- This page is shown when the extension button is clicked, because the "browser_action" 
+	 field in manifest.json contains the "default_popup" key with value "popup.html".  -->
+<html>
+	<head>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/functions.js"></script>
+		<script src="../js/popup.js"></script>
+		<title>Epiphany</title>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/popup.css">
+	</head>
+	<body>
+		<div id="done">Shared!</div>
+		<div id="edit">
+			<h1>Profile</h1>
+			<input name="name" placeholder="Set your screen name..."></input>
+			<br /><br />
+			<button id="save-name">Save</button>
+		</div>
+		<h1>Share page</h1><a id="profile" href="#"><span id="name"></span><i>&#xf013;</i></a>
+		<textarea placeholder="Add a command..." id="comment" rows="1"></textarea>
+		<p>Share with</p>
+		<div id="users"></div>
+		<div id="status"></div>
+		
+	</body>
+</html>
