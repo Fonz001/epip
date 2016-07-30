@@ -49,12 +49,3 @@ Team Epiphany
 
 * `/slack?code=xxx`:
     * _description_: Redirect URI after slack login
-
-Datamodel:
-* url: string;
-* description: string;
-* title: string;
-* comment: string;
-* slack: string;
-* createdAt: date;
-* viewedAt: date (optional?);
