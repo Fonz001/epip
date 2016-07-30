@@ -1,6 +1,5 @@
 <!doctype html>
-<!-- This page is shown when the extension button is clicked, because the "browser_action" 
-	 field in manifest.json contains the "default_popup" key with value "popup.html".  -->
+<!-- This page is shown when the extension button is clicked, see "browser_action" in manifest.json -->
 <html>
 	<head>
 		<script src="../js/jquery.min.js"></script>
@@ -11,18 +10,24 @@
 		<link rel="stylesheet" type="text/css" href="../css/popup.css">
 	</head>
 	<body>
-		<div id="done">Shared!</div>
+		<div id="done">
+			Shared!
+		</div>
 		<div id="edit">
 			<h1>Profile</h1>
-			<input name="name" placeholder="Set your screen name..."></input>
-			<br /><br />
+			<input id="input_name" name="name" placeholder="Screen name...">
+			<input id="input_email" name="email" placeholder="E-mail address...">
+			<br><br>
 			<button id="save-name">Save</button>
 		</div>
-		<h1>Share page</h1><a id="profile" href="#"><span id="name"></span><i>&#xf013;</i></a>
-		<textarea placeholder="Add a command..." id="comment" rows="1"></textarea>
-		<p>Share with</p>
+		<h1>Share this page</h1>
+		<a id="profile" href="#">
+			<span id="name"></span>
+			<i class="fa fa-cog"></i>
+		</a>
+		<textarea placeholder="Add a comment..." id="comment" rows="1"></textarea>
+		<p>with</p>
 		<div id="users"></div>
 		<div id="status"></div>
-		
 	</body>
 </html>
