@@ -66,3 +66,14 @@ function get_local_stored_user_id(callback)
     }
   });
 }
+
+/**
+ * Parse url to find YouTube video id.
+ * @param {string} url
+ * @returns {string|boolean}
+ */
+function parseYoutube(url) {
+  var pattern = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+  var match = url.match(pattern);
+  return (match && match[1].length == 11) ? match[1] : false;
+}
