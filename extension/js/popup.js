@@ -4,6 +4,11 @@ $(document).ready(function() {
   get_current_tab(function(tab) {
     tabInfo = tab;
 
+    if (0 != tabInfo.url.indexOf('http')) {
+      document.write('<img src="https://img.youtube.com/vi/3ge8RjQQvY8/maxresdefault.jpg" style="height:145px;float:left;margin-right:10px;"><h1>this<br>is<br>not<br>a<br>website</h1>');
+      return;
+    }
+
     get_data(function(data) {
       // determine if profile data exists
       if (!data.user.name) {
