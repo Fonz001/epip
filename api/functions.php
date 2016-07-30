@@ -25,15 +25,16 @@ function delete_share( $url, $userId )
 	$query 		-> execute();
 }
 
-function set_user_data( $apiId, $name  )
+function set_user_data( $apiId, $name, $email=''  )
 {
 	global $con;
 
 	$userId 	=  get_user_id( $apiId );
 
-	$query 		=  $con->prepare( "UPDATE `users` SET `name` = :name WHERE `userId` = :userId LIMIT 1;" );
+	$query 		=  $con->prepare( "UPDATE `users` SET `name` = :name,`email` = :email WHERE `userId` = :userId LIMIT 1;" );
 	$query      -> bindValue('userId', $userId?$userId:'', PDO::PARAM_STR);
 	$query      -> bindValue('name', $name?$name:'', PDO::PARAM_STR);
+	$query      -> bindValue('email', $email?$email:'', PDO::PARAM_STR);
 	$query 		-> execute();
 }
 

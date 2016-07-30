@@ -9,7 +9,7 @@ if( isset($_GET['del']) ){
 }elseif( isset($_GET['url']) ){
 	insert_share( $_GET['creatorId'], $_GET['url'], $_GET['user'], $_GET['title'], $_GET['comment'] );
 }elseif( isset($_GET['name']) ){
-	set_user_data( $_GET['creatorId'], $_GET['name'] );
+	set_user_data( $_GET['creatorId'], $_GET['name'], $_GET['email'] );
 }
 
 print_r(json_encode($_GET));
