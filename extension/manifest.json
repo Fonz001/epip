@@ -3,7 +3,7 @@
 
   "name": "Epiphany",
   "description": "Share if you care",
-  "version": "1.0",
+  "version": "1.1",
   "browser_action": {
     "default_icon": "img/icon.png",
     "default_popup": "htm/popup.html"
