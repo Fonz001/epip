@@ -1,7 +1,5 @@
 $(function(){
-  get_data(
-  function(data)
-  {
+  get_data(function(data) {
     console.log(data);
 
     if(data.shares.length < 1)
@@ -34,7 +32,5 @@ $(function(){
     $('#author').append(avatar).append(name);
       $('#preview').append(screenshot);
       $('#comment').append(comment).width(($('#comment em').outerWidth() + 30) + 'px');  // width fix
-  }, {
-  	url: 'http://api.jquery.com/jquery.each/'
   });
 });

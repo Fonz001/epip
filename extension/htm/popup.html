@@ -1,33 +1,36 @@
 <!doctype html>
 <!-- This page is shown when the extension button is clicked, see "browser_action" in manifest.json -->
-<html>
-	<head>
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/functions.js"></script>
-		<script src="../js/popup.js"></script>
-		<title>Epiphany</title>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/popup.css">
-	</head>
-	<body>
-		<div id="done">
-			Shared!
-		</div>
-		<div id="edit">
-			<h1>Edit profile</h1>
-			<input id="input_name" name="name" placeholder="Screen name...">
-			<input id="input_email" name="email" placeholder="E-mail address...">
-			<br><br>
-			<button id="save-name">Save</button>
-		</div>
-		<h1>Share this page</h1>
-		<a id="profile" href="#">
-			<span id="name"></span>
-			<i class="fa fa-cog"></i>
-		</a>
-		<textarea placeholder="Add a comment..." id="comment" rows="1"></textarea>
-		<p>with</p>
-		<div id="users"></div>
-		<div id="status"></div>
-	</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Team Epiphany">
+    <title>Epiphany</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/popup.css">
+  </head>
+  <body>
+    <div id="done">
+      Shared!
+    </div>
+    <div id="edit">
+      <h1>Edit profile</h1>
+      <input id="input_name" name="name" placeholder="Screen name...">
+      <input id="input_email" name="email" placeholder="E-mail address...">
+      <br><br>
+      <button id="save-name">Save</button>
+    </div>
+    <h1>Share this page</h1>
+    <a id="profile" href="#">
+      <span id="name"></span>
+      <i class="fa fa-cog"></i>
+    </a>
+    <textarea placeholder="Add a comment..." id="comment" rows="1"></textarea>
+    <p>with</p>
+    <div id="users"></div>
+    <div id="status"></div>
+    <script src="../lib/jquery-3.1.0.min.js"></script>
+    <script src="../js/functions.js"></script>
+    <script src="../js/popup.js"></script>
+  </body>
 </html>

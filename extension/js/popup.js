@@ -37,18 +37,18 @@ $(document).ready(function() {
         set_data({
           name: name,
           email: email
-        },function(data){
+        }, function(data){
           if (data.name) {
             $('#edit').removeClass('show');
           }
         });
       });
     }, {
-      url:tabInfo.url
+      url: tabInfo.url
     });
   });
 
-  // SHARE TAB
+  // share tab
   function share_tab(event) {
     event.stopPropagation();
 
@@ -64,14 +64,13 @@ $(document).ready(function() {
       data.del = true;
     }
 
-    // SHARE TAB INFO
-    set_data(data, function(data) {
+    // share tab info
+    set_data(data, function(response) {
       if(e.hasClass('sent')) {
         e.removeClass('sent');
       } else {
         e.addClass('sent');
       }
-      //alert(JSON.stringify(data));
     });
   }
 });
