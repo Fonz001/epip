@@ -1,28 +1,28 @@
 {
-	"manifest_version": 2,
+  "manifest_version": 2,
 
-	"name": "Epiphany",
-	"description": "Share if you care",
-	"version": "1.0",
-	"browser_action": {
-		"default_icon": "img/icon.png",
-		"default_popup": "htm/popup.html"
-	},
+  "name": "Epiphany",
+  "description": "Share if you care",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "htm/popup.html"
+  },
 
-	"chrome_url_overrides" : {
-		"newtab": "htm/newtab.html"
-	},
+  "chrome_url_overrides" : {
+    "newtab": "htm/newtab.html"
+  },
 
-	"permissions": [
-		"activeTab",
-		"storage",
-		//"tabs",
-		"http://epip.nl/"
-	],
+  "permissions": [
+    "activeTab",
+    "storage",
+    //"tabs",
+    "http://epip.nl/"
+  ],
 
-	"icons": {
-		"16": "img/icon.png",
-		"48": "img/body.png",
-		"128": "img/body.png"
-	}
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/body.png",
+    "128": "img/body.png"
+  }
 }
