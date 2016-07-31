@@ -1,56 +1,66 @@
-$(document).ready(function() {
+$(function(){
   var tabInfo = null;
 
-  get_current_tab(function(tab) {
+  get_current_tab(function(tab){
     tabInfo = tab;
 
+    // check if tab can be shared
     if (0 != tabInfo.url.indexOf('http')) {
-      document.write('<img src="https://img.youtube.com/vi/3ge8RjQQvY8/maxresdefault.jpg" style="height:145px;float:left;margin-right:10px;"><h1>this<br>is<br>not<br>a<br>website</h1>');
+      selectTab('noshare');
       return;
     }
 
-    get_data(function(data) {
-      // determine if profile data exists
+    selectTab('share');
+
+    get_data(function(data){
+      // determine if profile data exists or show edit form
       if (!data.user.name) {
-        $('#edit').addClass('show');
+        selectTab('edit');
       } else {
-        $('#input_name').val(data.user.name);
-        $('#input_email').val(data.user.email);
+        $('#input_name').val(data.user.name).parent().addClass('is-dirty');
         $('#name').text(data.user.name);
+        if (data.user.email) {
+          $('#input_email').val(data.user.email).parent().addClass('is-dirty');
+        }
       }
 
       // generate users to share with
       $.each(data.users, function(index, value) {
         var isSend = data.shared.indexOf(value.userId) >- 1;
-        $('#users').append('<button class="' + (isSend?'sent':'') + '" data-id="' + value.userId + '">' + value.name + '</button>');
+        $('#users').append(
+          '<button class="mdl-button mdl-js-button mdl-js-ripple-effect' + (isSend ? ' mdl-button--colored' : '') + '" data-id="' + value.userId + '">' +
+          '<i class="material-icons">share</i> ' + value.name +
+          '</button>');
       });
       $('#users button').on('click', share_tab);
 
-      // show edit page action
-      $('#profile').on('click', function() {
-        $('#edit').addClass('show');
-      });
-
       // save edit form action
-      $("#save-name").on('click', function() {
+      $('#edit_form').on('submit', function(){
         var name = $('#input_name').val();
         var email = $('#input_email').val();
 
         $('#name').text(name);
         $('[data-id=' + data.user.userId + ']').text(name);
 
+        // send new data to API
         set_data({
           name: name,
           email: email
         }, function(data){
           if (data.name) {
-            $('#edit').removeClass('show');
+            selectTab('share');
           }
         });
+        return false;
       });
     }, {
       url: tabInfo.url
     });
+  });
+
+  // profile edit page link
+  $('#profile').on('click', function(){
+    selectTab('edit');
   });
 
   // share tab
@@ -65,20 +75,18 @@ $(document).ready(function() {
       user:    e.attr('data-id')
     };
 
-    if(e.hasClass('sent')) {
+    // delete if item was already shared
+    if(e.hasClass('mdl-button--colored')) {
       data.del = true;
     }
 
     // share tab info
-    set_data(data, function(response) {
-      if(e.hasClass('sent')) {
-        e.removeClass('sent');
+    set_data(data, function(response){
+      if(e.hasClass('mdl-button--colored')) {
+        e.removeClass('mdl-button--colored');
       } else {
-        e.addClass('sent');
+        e.addClass('mdl-button--colored');
       }
     });
   }
 });
-
-// https://developer.chrome.com/extensions/tabs#method-query
-// tab.url is only available if the "activeTab" permission is declared.

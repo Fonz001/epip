@@ -6,9 +6,8 @@ var getUrl = 'http://epip.nl/api/get/';
  * @param {Object} data
  * @param {Function} callback
  */
-function set_data(data, callback)
-{
-  get_local_stored_user_id(function(creatorId) {
+function set_data(data, callback) {
+  get_local_stored_user_id(function(creatorId){
     data.creatorId = creatorId;
     $.get(setUrl, data, function(response) { callback(response); }, 'json');
   });
@@ -19,12 +18,11 @@ function set_data(data, callback)
  * @param {Function} callback
  * @param {Object} [data]
  */
-function get_data(callback, data)
-{
+function get_data(callback, data) {
   if (!data) {
     data = {};
   }
-  get_local_stored_user_id(function(creatorId) {
+  get_local_stored_user_id(function(creatorId){
     data.creatorId = creatorId;
     $.get(getUrl, data, function(response) { callback(response); }, 'json');
   });
@@ -34,13 +32,12 @@ function get_data(callback, data)
  * Get active tab info.
  * @param {Function} callback
  */
-function get_current_tab(callback)
-{
+function get_current_tab(callback) {
   var queryInfo = {
     active: true,
     currentWindow: true
   };
-  chrome.tabs.query(queryInfo, function(tabs) {
+  chrome.tabs.query(queryInfo, function(tabs){
     callback(tabs[0]);
   });
 }
@@ -49,13 +46,12 @@ function get_current_tab(callback)
  * Get user info.
  * @param {Function} callback
  */
-function get_local_stored_user_id(callback)
-{
-  chrome.storage.local.get('userId', function(obj) {
+function get_local_stored_user_id(callback) {
+  chrome.storage.local.get('userId', function(obj){
     if (obj.userId) {
       callback(obj.userId);
     } else {
-      var r = function() {
+      var r = function(){
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
       };
       var userId = (r()+r()+r()+r()+r()+r()+r()+r());
@@ -75,5 +71,18 @@ function get_local_stored_user_id(callback)
 function parseYoutube(url) {
   var pattern = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
   var match = url.match(pattern);
+
   return (match && match[1].length == 11) ? match[1] : false;
+}
+
+/**
+ * Select an mdl tab and resize the popup to the tab height
+ * @param {string} id
+ */
+function selectTab(id) {
+  $('.mdl-tabs__panel').removeClass('is-active');
+  $('#' + id).addClass('is-active');
+  $('html').height($('body').height());
+
+  return false;
 }

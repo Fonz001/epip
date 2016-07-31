@@ -1,5 +1,5 @@
 $(function(){
-  get_data(function(data) {
+  get_data(function(data){
     console.log(data);
 
     var epip = {
@@ -14,25 +14,24 @@ $(function(){
       var share   = data.shares[0];
       var creator = data.users[share.creatorId];
 
-      epip.name = creator.name;
-      epip.comment = share.comment;
-      epip.avatar = creator.avatar + '">';
-      epip.url = share.url;
+      epip.name       = creator.name;
+      epip.comment    = share.comment;
+      epip.avatar     = creator.avatar;
+      epip.url        = share.url;
       epip.screenshot = 'http://api.screenshotlayer.com/api/capture?access_key=d6ae0602784f7d1f84ca3e3fe98bc301&url=' + encodeURIComponent(share.url) + '&viewport=1440x900&width=1280';
 
       // inject gravatar image
-      if(creator.email) {
+      if (creator.email) {
         epip.avatar = '<img src="http://www.gravatar.com/avatar/' + md5(creator.email.toLowerCase()) + '">';
       }
 
       // overwrite screenshotlayer api with youtube image url
       var youtube = parseYoutube(share.url);
-      if(youtube) {
+      if (youtube) {
         epip.screenshot = 'https://img.youtube.com/vi/' + youtube + '/0.jpg';
       }
     }
 
-    $('#myname').append(' ' + data.user.name);
     $('#name').append(epip.name);
     $('#comment').append(epip.comment);
     $('#avatar').prepend(epip.avatar);
