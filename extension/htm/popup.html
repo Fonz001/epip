@@ -1,33 +1,75 @@
 <!doctype html>
 <!-- This page is shown when the extension button is clicked, see "browser_action" in manifest.json -->
-<html>
-	<head>
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/functions.js"></script>
-		<script src="../js/popup.js"></script>
-		<title>Epiphany</title>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/popup.css">
-	</head>
-	<body>
-		<div id="done">
-			Shared!
-		</div>
-		<div id="edit">
-			<h1>Edit profile</h1>
-			<input id="input_name" name="name" placeholder="Screen name...">
-			<input id="input_email" name="email" placeholder="E-mail address...">
-			<br><br>
-			<button id="save-name">Save</button>
-		</div>
-		<h1>Share this page</h1>
-		<a id="profile" href="#">
-			<span id="name"></span>
-			<i class="fa fa-cog"></i>
-		</a>
-		<textarea placeholder="Add a comment..." id="comment" rows="1"></textarea>
-		<p>with</p>
-		<div id="users"></div>
-		<div id="status"></div>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Team Epiphany">
+  <title>Epiphany</title>
+  <link rel="icon" type="image/png" href="../img/icon.png">
+  <link rel="stylesheet" href="../lib/material.blue-red.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="../css/popup.css">
+</head>
+<body>
+  <!-- dummy link to prevent focus border when opening popup -->
+  <a href="#"></a>
+
+  <div class="mdl-tabs mdl-js-tabs">
+    <div class="mdl-tabs__panel" id="noshare">
+      <img src="https://img.youtube.com/vi/3ge8RjQQvY8/maxresdefault.jpg">
+      <h3>this<br>is<br><span class="accent">NOT</span><br>a<br>website</h3>
+    </div>
+    <div class="mdl-tabs__panel" id="edit">
+      <form action="#" id="edit_form">
+        <div class="mdl-card">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Edit profile</h2>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="input_name">
+              <label class="mdl-textfield__label" for="input_name">Username</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="input_email">
+              <label class="mdl-textfield__label" for="input_email">E-mail address</label>
+            </div>
+          </div>
+          <div class="mdl-card__actions">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mdl-tabs__panel" id="share">
+      <div class="mdl-card">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text"><span id="name"></span>, share this page</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows= "1" id="comment"></textarea>
+            <label class="mdl-textfield__label" for="comment">Add a comment</label>
+          </div>
+        </div>
+        <div class="mdl-card__title subtitle">
+          <h2 class="mdl-card__title-text">with</h2>
+        </div>
+        <div class="mdl-card__actions" id="users"></div>
+        <div class="mdl-card__menu">
+          <a id="profile" href="#">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--icon">
+              <i class="material-icons">settings</i>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lib/material.min.js"></script>
+  <script src="../lib/jquery-3.1.0.min.js"></script>
+  <script src="../js/functions.js"></script>
+  <script src="../js/popup.js"></script>
+</body>
 </html>

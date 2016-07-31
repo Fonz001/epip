@@ -1,21 +1,45 @@
 <!doctype html>
 <!-- This page is shown when the user opens a new tab, see "chrome_url_overrides" in manifest.json -->
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Team Epiphany">
-    <title>Epiphany</title>
-    <link rel="stylesheet" type="text/css" href="../css/newtab.css">
-    <link rel="icon" type="image/png" href="../img/icon.png">
-  </head>
-  <body>
-    <h1 id="logo">Epiphany</h1>
-    <div id="author"></div>
-    <div id="comment"></div>
-    <div id="preview"></div>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/functions.js"></script>
-    <script src="../js/md5.js"></script>
-    <script src="../js/newtab.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Team Epiphany">
+  <title>Epiphany</title>
+  <link rel="icon" type="image/png" href="../img/icon.png">
+  <link rel="stylesheet" href="../lib/material.blue-red.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="../css/newtab.css">
+</head>
+<body>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
+      <h1><img src="../img/logo.png" alt="Epiphany"></h1>
+    </div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+      <div id="think-1" class="mdl-shadow--2dp"></div>
+      <div id="think-2" class="mdl-shadow--2dp"></div>
+      <div id="avatar" class="mdl-shadow--2dp">
+        <i class="material-icons">person</i>
+      </div>
+      <div id="message" class="mdl-shadow--2dp">
+        <p><strong id="name"></strong></p>
+        <p id="comment"></p>
+      </div>
+    </div>
+    <div class="mdl-cell mdl-cell--12-col" id="preview">
+      <a href="#">
+        <div id="teaser">
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">Check it out!</button>
+        </div>
+        <img src="../img/logo.png" class="mdl-shadow--2dp">
+      </a>
+    </div>
+  </div>
+
+  <script src="../lib/material.min.js"></script>
+  <script src="../lib/jquery-3.1.0.min.js"></script>
+  <script src="../lib/md5.js"></script>
+  <script src="../js/functions.js"></script>
+  <script src="../js/newtab.js"></script>
+</body>
 </html>
